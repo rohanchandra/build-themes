@@ -384,21 +384,7 @@
 
         {block:Link}
         <div class="type-link post-content">
-          <div class="link-wrapper">
-            <a {Target} href="{URL}" class="link-name">{Name}</a>
-
-            {block:Excerpt}
-            <p class="link-excerpt">
-              {Excerpt}
-            </p>
-            {/block:Excerpt}
-
-            {block:Author}
-            <p class="link-author">
-              {Author}
-            </p>
-            {/block:Author}
-          </div>
+          <a {Target} href="{URL}" class="link-name">{Name}</a>
 
           {block:Description}
           <div class="caption">
