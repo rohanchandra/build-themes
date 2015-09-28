@@ -141,6 +141,15 @@
         margin-top: 2.5%;
         margin-bottom: 2.5%;
       }
+      /* Messages */
+      .message {
+        font-size: 1.2em;
+        text-align: center;
+        margin: 2.5%;
+      }
+      .search_query {
+        font-weight: bold;
+      }
       /* Grid layout with Salvattore */
       main[data-columns]::before {
         content: '4 .js-column.js-size-1of4';
@@ -227,6 +236,27 @@
           <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
         </form>
     </header>
+
+    <!-- Search results -->
+    {block:SearchPage}
+    <div class="search-page message">
+      {block:SearchResults}
+      <p class="search-result">{lang:Search results for SearchQuery 2}</p>{/block:SearchResults}
+
+      {block:NoSearchResults}
+      <p class="search-result">{lang:Sorry no results for SearchQuery 2}</p>{/block:NoSearchResults}
+
+      <span class="divider"></span>
+    </div>
+    {/block:SearchPage}
+
+    {block:TagPage}
+    <div class="tag-page message">
+      <p class="tag-wrapper">{lang:Showing posts tagged Tag 2}</p>
+
+      <span class="divider"></span>
+    </div>
+    {/block:TagPage}
 
     <main role="main" {block:IndexPage}data-columns{/block:IndexPage}>
       {block:Posts}
