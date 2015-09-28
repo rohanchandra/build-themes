@@ -45,6 +45,10 @@
       nav li {
         display: inline;
       }
+      input {
+        border: none;
+        padding: 0.5em;
+      }
       /* Typography */
       a {
         text-decoration: none;
@@ -68,8 +72,33 @@
         padding: 2.5%;
         font-size: 1.2em;
       }
+      .meta-wrapper {
+        display: flex;
+        width: 100%;
+        align-items: center;
+      }
+      .portrait, .blog-details {
+        float: left;
+        padding: 0;
+      }
+      .portrait {
+        border-radius: 100em;
+        margin-right: 1em;
+      }
       .blog-title {
         font-size: 2.5em;
+        margin: 0;
+      }
+      .blog-description {
+        margin: 0;
+      }
+      .nav-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .nav-wrapper nav {
+          float: left;
+          flex: 1 1 0%;
       }
       /* Content */
       article {
@@ -153,46 +182,47 @@
   <body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}">
     <header class="banner" role="banner">
       <div class="meta-wrapper">
-        <div class="portrait-wrapper">
-            <img src="{PortraitURL-128}"/>
+        <img class="portrait" src="{PortraitURL-128}"/>
+
+        <div class="blog-details">
+          <h1 class="blog-title">
+            <a href="/" title="{lang:Home}">{Title}</a>
+          </h1>
+
+          {block:Description}
+          <p class="blog-description">{Description}</p>
+          {block:Description}
         </div>
-
-        <h1 class="blog-title">
-          <a href="/" title="{lang:Home}">{Title}</a>
-        </h1>
-
-        {block:Description}
-        <p class="blog-description">{Description}</p>
-        {block:Description}
       </div>
-      
-      <nav>
-        <ul>
-            {block:HasPages}
-            {block:Pages}
-            <li>
-              <a href="{URL}">{Label}</a>
-            </li>
-            {/block:Pages}
-            {/block:HasPages}
 
-            {block:SubmissionsEnabled}
-            <li>
-              <a href="/submit">{SubmitLabel}</a>
-            </li>
-            {/block:SubmissionsEnabled}
+      <div class="nav-wrapper">
+        <nav>
+          <ul>
+              {block:HasPages}
+              {block:Pages}
+              <li>
+                <a href="{URL}">{Label}</a>
+              </li>
+              {/block:Pages}
+              {/block:HasPages}
 
-            {block:AskEnabled}
-            <li>
-              <a href="/ask">{AskLabel}</a>
-            </li>
-            {/block:AskEnabled}
-        </ul>
-      </nav>
+              {block:SubmissionsEnabled}
+              <li>
+                <a href="/submit">{SubmitLabel}</a>
+              </li>
+              {/block:SubmissionsEnabled}
 
-      <form action="/search" method="get">
-        <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
-      </form>
+              {block:AskEnabled}
+              <li>
+                <a href="/ask">{AskLabel}</a>
+              </li>
+              {/block:AskEnabled}
+          </ul>
+        </nav>
+
+        <form action="/search" method="get">
+          <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
+        </form>
     </header>
 
     <main role="main" {block:IndexPage}data-columns{/block:IndexPage}>
