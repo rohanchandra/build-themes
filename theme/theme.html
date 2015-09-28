@@ -129,10 +129,6 @@
         margin-bottom: 7%;
         line-height: 1.5;
       }
-      .is-permalink-page article {
-        margin-left: 0.75%;
-        margin-right: 0.75%;
-      }
       .contentinfo {
         font-size: 0.8em;
         text-transform: uppercase;
@@ -290,7 +286,7 @@
 
     <main role="main" {block:IndexPage}data-columns{/block:IndexPage}>
       {block:Posts}
-      <article>
+      <article {block:PermalinkPage}class='js-column'{/block:PermalinkPage}>
         {block:Text}
         <div class="text post-content">
           {block:Title}
@@ -491,7 +487,7 @@
 
     // Data and theme state
     var model = {
-      $articles: $('article'),
+      $articles: $('.js-column'),
       $masthead: $('.masthead'),
       $pagination: $('.pagination')
     };
