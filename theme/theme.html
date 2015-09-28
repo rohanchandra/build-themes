@@ -85,7 +85,6 @@
         padding: 2.5%;
         font-size: 1.2em;
         color: {color:Masthead text and links};
-        opacity: 0.8;
       }
       .masthead a {
         color: {color:Masthead text and links};
@@ -128,6 +127,9 @@
         border-radius: 0.2em;
         margin-bottom: 7%;
         line-height: 1.5;
+      }
+      .is-permalink-page article {
+        width: 98.5%;
       }
       .contentinfo {
         font-size: 0.8em;
@@ -501,9 +503,6 @@
       hideLoadingMessage: function() {
         this.$loadingMessage.velocity("transition.slideDownOut", 500);
       },
-      fadeMastheadIn: function() {
-        model.$masthead.velocity({ opacity: 1 })
-      },
       showContent: function() {
         model.$articles.velocity("transition.slideLeftIn", { duration: 500, stagger: 250 });
         model.$pagination.show();
@@ -518,7 +517,6 @@
     var controller = {
       init: function() {
         if (config.transitions) {
-          view.fadeMastheadIn();
           view.hideContent();
           view.showLoadingMessage();
         }
