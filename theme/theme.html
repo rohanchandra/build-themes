@@ -8,7 +8,8 @@
     {/block:Description}
 
     {block:Hidden}
-
+    <meta name="font:Title" content="Arial, Helvetica, sans-serif"/>
+    <meta name="font:Body" content="Arial, Helvetica, sans-serif"/>
     {/block:Hidden}
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,6 +51,9 @@
         padding: 0.5em;
       }
       /* Typography */
+      body {
+        font-family: {font:Body};
+      }
       a {
         text-decoration: none;
         color: #3B3B3B;
@@ -60,6 +64,7 @@
         border-left: 0.2em solid #E0E0E0;
       }
       h1, h2, h3, h4, h5, h6 {
+        font-family: {font:Title};
         font-weight: normal;
       }
       /* Containers */
