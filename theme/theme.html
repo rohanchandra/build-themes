@@ -431,7 +431,8 @@
 
     // Data and theme state
     var model = {
-      $articles: $('article')
+      $articles: $('article'),
+      $pagination: $('.pagination')
     };
 
     // Displaying data and state
@@ -445,9 +446,11 @@
       },
       showContent: function() {
         model.$articles.velocity("transition.slideLeftIn", { duration: 1000, stagger: 250 });
+        model.$pagination.show();
       },
       hideContent: function() {
         model.$articles.hide();
+        model.$pagination.hide();
       }
     };
 
