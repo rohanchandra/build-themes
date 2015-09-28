@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}</title>
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+
+    {block:Hidden}
+
+    {/block:Hidden}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{Favicon}"/>
+    <link rel="alternate" type="application/rss+xml" href="{RSS}"/>
+    <link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}">
+
+    <link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/9Qenv9yn8/normalize.min.css" />
+    <style>
+      /* Responsive content */
+      iframe, img, embed, object, video {
+      	max-width: 100%;
+      }
+      img {
+      	height: auto;
+      	width: auto;
+      }
+
+      /* Grid layout with Salvattore */
+      main[data-columns]::before {
+        content: '3 .js-column.js-size-1of3';
+      }
+      .js-column { float: left; }
+      .js-size-1of1 { width: 100%; }
+      .js-size-1of2 { width: 50%; }
+      .js-size-1of3 { width: 33.333%; }
+
+      /* Loading message */
+      .js-loading-message {
+        text-align: center;
+        font-weight: bold;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        display: inline-block;
+      }
+
+      /* Custom CSS */
+      {CustomCSS}
+    </style>
+  </head>
+
+  <body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}">
+    <header class="banner" role="banner">
+      <div class="portrait-wrapper">
+          <img src="{PortraitURL-128}"/>
+      </div>
+
+      <h1>
+        <a href="/" title="{lang:Home}">{Title}</a>
+      </h1>
+
+      <nav>
+        <ul>
+            {block:HasPages}
+            {block:Pages}
+            <li>
+              <a href="{URL}">{Label}</a>
+            </li>
+            {/block:Pages}
+            {/block:HasPages}
+
+            {block:SubmissionsEnabled}
+            <li>
+              <a href="/submit">{SubmitLabel}</a>
+            </li>
+            {/block:SubmissionsEnabled}
+
+            {block:AskEnabled}
+            <li>
+              <a href="/ask">{AskLabel}</a>
+            </li>
+            {/block:AskEnabled}
+        </ul>
+      </nav>
+
+      {block:Description}
+      <p>{Description}</p>
+      {block:Description}
+
+      <form action="/search" method="get">
+        <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
+      </form>
+    </header>
+
+    <main role="main" {block:IndexPage}data-columns{/block:IndexPage}>
+      {block:Posts}
+      <article>
+        {block:Text}
+        <div class="text post-content">
+          {block:Title}
+          <h2 class="title">
+            <a href="{Permalink}">{Title}</a>
+          </h2>
+          {/block:Title}
+
+          {Body}
+        </div>
+        {/block:Text}
+
+        {block:Photo}
+        <figure class="type-photo post-content">
+          {LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />{LinkCloseTag}
+
+          {block:Caption}
+          <figcaption class="caption">
+            {Caption}
+          </figcaption>
+          {/block:Caption}
+        </figure>
+        {/block:Photo}
+
+        {block:Photoset}
+        <figure class="type-photoset post-content">
+          {Photoset}
+
+          {block:Caption}
+          <figcaption class="caption">
+            {Caption}
+          </figcaption>
+          {/block:Caption}
+        </figure>
+        {/block:Photoset}
+
+        {block:Quote}
+        <div class="type-quote post-content">
+          <blockquote>{Quote}</blockquote>
+
+          {block:Source}
+          <cite class="caption">
+            {Source}
+          </cite>
+          {/block:Source}
+        </div>
+        {/block:Quote}
+
+        {block:Link}
+        <div class="type-link post-content">
+          <div class="link-wrapper">
+            <a {Target} href="{URL}" class="link-name">{Name}</a>
+
+            {block:Excerpt}
+            <p class="link-excerpt">
+              {Excerpt}
+            </p>
+            {/block:Excerpt}
+
+            {block:Author}
+            <p class="link-author">
+              {Author}
+            </p>
+            {/block:Author}
+          </div>
+
+          {block:Description}
+          <div class="caption">
+            {Description}
+          </div>
+          {/block:Description}
+        </div>
+        {/block:Link}
+
+        {block:Chat}
+        <div class="type-chat post-content">
+          <ul class="chat-lines">
+            {block:Lines}
+            <li>
+              {block:Label}<span class="label">{Label}</span>{/block:Label} {Line}
+            </li>
+            {/block:Lines}
+          </ul>
+        </div>
+        {/block:Chat}
+
+        {block:Audio}
+        <div class="type-audio post-content">
+          {block:AudioEmbed}
+              {AudioEmbed color="white"}
+          {/block:AudioEmbed}
+
+          {block:Caption}
+          <div class="caption">
+            {Caption}
+          </div>
+          {/block:Caption}
+        </div>
+        {/block:Audio}
+
+        {block:Video}
+        <div class="type-video post-content">
+          {Video-700}
+
+          {block:Caption}
+          <div class="caption">
+            {Caption}
+          </div>
+          {/block:Caption}
+        </div>
+        {/block:Video}
+
+        {block:Answer}
+        <div class="type-answer post-content">
+          <div class="question">
+            <p class="asker">
+              <span class="user-name">{Asker}</span> asked:
+            </p>
+
+            <h2 class="title">{Question}</h2>
+          </div>
+
+          {block:Answerer}
+          <div class="answer">
+              <p class="answerer">
+                <span class="user-name">{Answerer}</span> answered:
+              </p>
+
+              <div class="caption">
+                  {Answer}
+              </div>
+          </div>
+          {/block:Answerer}
+
+          <div class="replies">
+            {Replies}
+          </div>
+        </div>
+        {/block:Answer}
+
+        {block:Date}
+        <footer class="contentinfo" role="contentinfo">
+          <a href="{Permalink}" title="{ShortMonth} {DayOfMonth} {DayOfMonthSuffix} {Year}">
+              {lang:Posted TimeAgo}
+          </a>
+
+          {block:NoteCount}
+          <a class="note-count" href="{Permalink}#notes">
+            {NoteCountWithLabel}
+          </a>
+          {/block:NoteCount}
+
+          {block:RebloggedFrom}
+          <a class="reblog-link" href="{ReblogParentURL}">
+            {ReblogParentName}
+          </a>
+          {/block:RebloggedFrom}
+
+          {block:PermalinkPage}
+
+          {block:HasTags}
+          <ul class="tags">
+            {block:Tags}<li><a href="{TagURL}">{Tag}</a> </li>{/block:Tags}
+          </ul>
+          {/block:HasTags}
+
+          {block:PostNotes}
+          <div class="post-notes">
+            {PostNotes}
+          </div>
+          {/block:PostNotes}
+
+          {/block:PermalinkPage}
+        </footer>
+        {/block:Date}
+      </article>
+      {/block:Posts}
+    </main>
+
+    {block:Pagination}
+    <nav class="pagination">
+      <ul>
+        {block:PreviousPage}<li><a href="{PreviousPage}">{lang:Previous}</a></li>{/block:PreviousPage}
+        {block:NextPage}<li><a href="{NextPage}">{lang:Next}</a></li>{/block:NextPage}
+      </ul>
+    </nav>
+    {/block:Pagination}
+
+    <script src="//static.tumblr.com/xeccbfq/Qgqnv9yqb/jquery.min.js"></script>
+    <script src="//static.tumblr.com/xeccbfq/V7Fnvbb38/libs.min.js"></script>
+    <script>
+    // Developer configuration
+    var config = {
+      transitions: true,
+      loadingMessage: '{lang:Loading}...',
+      loadingMessageClass: 'js-loading-message'
+    };
+
+    // Data and theme state
+    var model = {
+      $articles: $('article')
+    };
+
+    // Displaying data and state
+    var view = {
+      showLoadingMessage: function() {
+        this.$loadingMessage = $('<p>').text(config.loadingMessage).addClass(config.loadingMessageClass);
+        this.$loadingMessage.appendTo('body');
+      },
+      hideLoadingMessage: function() {
+        this.$loadingMessage.velocity("transition.slideDownOut", 1000);
+      },
+      showContent: function() {
+        model.$articles.velocity("transition.slideLeftIn", { duration: 1000, stagger: 250 });
+      },
+      hideContent: function() {
+        model.$articles.hide();
+      }
+    };
+
+    // Manages view and data
+    var controller = {
+      init: function() {
+        if (config.transitions) {
+          view.hideContent();
+          view.showLoadingMessage();
+        }
+      },
+      onPageLoad: function() {
+        if (config.transitions) {
+          view.showContent();
+          view.hideLoadingMessage();
+        }
+      }
+    };
+
+    // Run controller and listen for load event
+    controller.init();
+    $(window).load(function() {
+        controller.onPageLoad();
+    });
+    </script>
+  </body>
+</html>
