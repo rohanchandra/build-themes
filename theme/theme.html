@@ -27,15 +27,75 @@
       	width: auto;
       }
 
+      /* Global resets */
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      nav ul {
+        list-style: outside none none;
+        padding: 0;
+      }
+      nav li {
+        display: inline;
+      }
+      /* Typography */
+      a {
+        text-decoration: none;
+        color: #3B3B3B;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: normal;
+      }
+      /* Containers */
+      body {
+        background: #f2f2f2;
+      }
+
+      /* Header */
+      .banner {
+        padding: 2.5%;
+      }
+      .blog-title {
+        font-size: 2.5em;
+      }
+      /* Content */
+      article {
+        background: #ffffff;
+      }
+      .pagination {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        margin-top: 2.5%;
+        margin-bottom: 2.5%;
+      }
       /* Grid layout with Salvattore */
       main[data-columns]::before {
         content: '3 .js-column.js-size-1of3';
       }
-      .js-column { float: left; }
-      .js-size-1of1 { width: 100%; }
-      .js-size-1of2 { width: 50%; }
-      .js-size-1of3 { width: 33.333%; }
-
+      .js-column {
+        float: left;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+      }
+      .js-column:last-child {
+        margin-left: 0;
+      }
+      .js-column:first-child {
+        margin-right: 0;
+      }
+      .js-size-1of1 {
+        width: 90%;
+      }
+      .js-size-1of2 {
+         width: 45%;
+       }
+      .js-size-1of3 {
+        width: 30%;
+      }
       /* Loading message */
       .js-loading-message {
         text-align: center;
@@ -58,10 +118,14 @@
           <img src="{PortraitURL-128}"/>
       </div>
 
-      <h1>
+      <h1 class="blog-title">
         <a href="/" title="{lang:Home}">{Title}</a>
       </h1>
 
+      {block:Description}
+      <p class="blog-description">{Description}</p>
+      
+      {block:Description}
       <nav>
         <ul>
             {block:HasPages}
@@ -85,10 +149,6 @@
             {/block:AskEnabled}
         </ul>
       </nav>
-
-      {block:Description}
-      <p>{Description}</p>
-      {block:Description}
 
       <form action="/search" method="get">
         <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
