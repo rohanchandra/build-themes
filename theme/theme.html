@@ -71,6 +71,7 @@
       h1, h2, h3, h4, h5, h6 {
         font-family: {font:Title};
         font-weight: normal;
+        line-height: 1.2;
       }
       /* Containers */
       body {
@@ -152,6 +153,23 @@
         display: inline-block;
         width: 100%;
         padding: 2em;
+      }
+      .post-content .title {
+        margin-top: 0;
+      }
+      .type-chat .chat-lines {
+        margin: 0;
+        list-style-type: none;
+      }
+      .type-chat .chat-lines li {
+        margin: 1em 0;
+      }
+      .type-chat .chat-lines .label {
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        width: 100%;
+        display: inline-block;
       }
       .pagination {
         width: 100%;
