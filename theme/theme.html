@@ -70,7 +70,7 @@
       }
       /* Containers */
       body {
-        background-color: #f2f2f2;
+        background-color: {BackgroundColor};
       }
 
       /* Header */
@@ -84,12 +84,18 @@
         align-items: center;
       }
       .portrait {
-        border-radius: 100em;
         margin-right: 1em;
+      }
+      .portrait.global-shape-circle {
+        border-radius: 100em;
       }
       .blog-title {
         font-size: 2.5em;
         margin: 0;
+      }
+      .blog-title a {
+        font-weight: {TitleFontWeight};
+        color: {TitleColor};
       }
       .blog-description {
         margin: 0;
@@ -99,8 +105,8 @@
         align-items: center;
       }
       .nav-wrapper nav {
-          float: left;
-          flex: 1 1 0%;
+        float: left;
+        flex: 1 1 0%;
       }
       .banner nav li {
         margin-right: 1em;
@@ -198,16 +204,22 @@
   <body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}">
     <header class="banner" role="banner">
       <div class="meta-wrapper">
-        <img class="portrait" src="{PortraitURL-128}"/>
+        {block:ShowAvatar}
+        <img class="portrait global-shape-{AvatarShape}" src="{PortraitURL-128}"/>
+        {/block:ShowAvatar}
 
         <div class="blog-details">
+          {block:ShowTitle}
           <h1 class="blog-title">
             <a href="/" title="{lang:Home}">{Title}</a>
           </h1>
+          {/block:ShowTitle}
 
+          {block:ShowDescription}
           {block:Description}
           <p class="blog-description">{Description}</p>
           {block:Description}
+          {/block:ShowDescription}
         </div>
       </div>
 
