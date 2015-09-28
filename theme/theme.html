@@ -154,7 +154,8 @@
         color: #ADADAD;
         line-height: 2;
       }
-      .contentinfo .note {
+      .contentinfo .note,
+      .tags li {
         list-style-type: none;
       }
       .post-content {
@@ -483,7 +484,7 @@
 
           {block:HasTags}
           <ul class="tags">
-            {block:Tags}<li><a href="{TagURL}">{Tag}</a> </li>{/block:Tags}
+            {block:Tags}<li><a href="{TagURL}">#{Tag}</a> </li>{/block:Tags}
           </ul>
           {/block:HasTags}
 
