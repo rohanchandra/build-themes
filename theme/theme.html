@@ -10,6 +10,7 @@
     {block:Hidden}
     <meta name="font:Title" content="Arial, Helvetica, sans-serif"/>
     <meta name="font:Body" content="Arial, Helvetica, sans-serif"/>
+    <meta name="image:Background" content=""/>
     {/block:Hidden}
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,6 +72,10 @@
       /* Containers */
       body {
         background-color: {BackgroundColor};
+        background-image: url('{image:Background}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
       }
 
       /* Header */
