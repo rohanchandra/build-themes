@@ -10,6 +10,8 @@
     {block:Hidden}
     <meta name="font:Title" content="Arial, Helvetica, sans-serif"/>
     <meta name="font:Body" content="Arial, Helvetica, sans-serif"/>
+    <meta name="color:Masthead text and links" content="{TitleColor}"/>
+    <meta name="color:Body text" content="#313131"/>
     <meta name="image:Background" content=""/>
     {/block:Hidden}
 
@@ -55,10 +57,11 @@
       /* Typography */
       body {
         font-family: {font:Body};
+        color: {color:Body text};
       }
       a {
         text-decoration: none;
-        color: #3B3B3B;
+        color: {AccentColor};
       }
       blockquote {
         margin: 0;
@@ -77,11 +80,14 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
       }
-
       /* Header */
       .banner {
         padding: 2.5%;
         font-size: 1.2em;
+        color: {color:Masthead text and links};
+      }
+      .banner a {
+        color: {color:Masthead text and links};
       }
       .meta-wrapper {
         display: flex;
@@ -100,7 +106,6 @@
       }
       .blog-title a {
         font-weight: {TitleFontWeight};
-        color: {TitleColor};
       }
       .blog-description {
         margin: 0;
