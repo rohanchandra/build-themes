@@ -9,4 +9,5 @@ A free book for learning how to make Tumblr themes.
 ## License
 
 Book: Creative Commons Attribution-NonCommercial 4.0 International License
+
 Code: The MIT License (MIT)
