@@ -15,6 +15,13 @@
           *, *:before, *:after {
             box-sizing: border-box;
           }
+          iframe, img, embed, object, video {
+            max-width: 100%;
+          }
+          img {
+            height: auto;
+            width: auto;
+          }
           body {
             display: flex;
             min-height: 100vh;
@@ -182,12 +189,39 @@
             padding: 5em;
             background-color: #4D4D4D;
             font-size: 1.5em;
+            position: fixed;
+            width: 100%;
           }
           .js-hide {
             display: none !important;
           }
           .js-show {
             display: inline-block;
+          }
+          .language-html, .language-css {
+            background: #DFFFEF;
+            padding: 1em;
+            font-size: 0.75em;
+            color: rgba(0, 0, 0, 0.53);
+          }
+          @media screen and (max-width: 1100px) {
+            .inner-content {
+              margin: 6% 7%;
+            }
+            footer {
+              padding: 2em 2em;
+            }
+            #chapter-nav-dropdown {
+              padding: 1em;
+            }
+          }
+          @media screen and (max-width: 800px) {
+            .inner-content, .content-wrapper {
+              font-size: 1.2rem;
+            }
+            .content-wrapper {
+              display: inline-block;
+            }
           }
           {CustomCSS}
         </style>
@@ -198,7 +232,7 @@
         <section class="masthead">
           <h1>Build Themes</h1>
           <h2>Learn how to make Tumblr themes</h2>
-          <a href="#" class="btn">Start reading</a>
+          <a href="/ch1" class="btn">Start reading</a>
         </section>
 
         <main role="main">
@@ -222,12 +256,11 @@
             <h2 class="js-bold-headings">Browse by Chapter</h2>
             <div class="content-wrapper button-bar">
               <ol class="nav-list">
-                <li><a href="#">Chapter one</a></li>
-                <li><a href="#">Chapter two</a></li>
-                <li><a href="#">Chapter three</a></li>
-                <li><a href="#">Chapter four</a></li>
-                <li><a href="#">Chapter five</a></li>
-                <li><a href="#">Chapter six</a></li>
+                <li><a href="/ch1">Chapter one</a></li>
+                <li><a href="/ch2">Chapter two</a></li>
+                <li><a href="/ch3">Chapter three</a></li>
+                <li><a href="/ch4">Chapter four</a></li>
+                <li><a href="/ch5">Chapter five</a></li>
               </ol>
             </div>
           </section>
@@ -245,12 +278,11 @@
         <div id="chapter-nav-dropdown" class="js-hide">
           <div class="button-bar">
             <ol class="nav-list">
-              <li><a href="#">Chapter one</a></li>
-              <li><a href="#">Chapter two</a></li>
-              <li><a href="#">Chapter three</a></li>
-              <li><a href="#">Chapter four</a></li>
-              <li><a href="#">Chapter five</a></li>
-              <li><a href="#">Chapter six</a></li>
+              <li><a href="/ch1">Chapter one</a></li>
+              <li><a href="/ch2">Chapter two</a></li>
+              <li><a href="/ch3">Chapter three</a></li>
+              <li><a href="/ch4">Chapter four</a></li>
+              <li><a href="/ch5">Chapter five</a></li>
             </ol>
           </div>
         </div>
@@ -280,8 +312,8 @@
 
           <div class="column-right">
               <ol class="nav-list">
-                <li><a href="#">Colophon</a></li>
-                <li><a href="#">Copyright</a></li>
+                <li><a href="/colophon">Colophon</a></li>
+                <li><a href="/copyright">Copyright</a></li>
                 <li><a href="#"><i class="fa fa-github"></i></a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
               </ol>

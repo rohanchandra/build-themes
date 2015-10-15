@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}</title>
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{Favicon}"/>
+    <link rel="alternate" type="application/rss+xml" href="{RSS}"/>
+    <link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}">
+
+    <link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/9Qenv9yn8/normalize.min.css" />
+    <link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/lT5nwa5y4/theme.css" />
+    <style>
+      /* TODO: JS: Grid layout from Chapter 4 */
+
+      /* TODO: JS: loading message from Chapter 4 */
+
+      /* TODO: Tumblr: Add CSS customization from Chapter 3 */
+    </style>
+  </head>
+
+  <body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}">
+    <header class="masthead" role="banner">
+    <-- TODO: Add masthead markup from Chapter 2 -->
+    </header>
+
+    <!-- Search results -->
+    {block:SearchPage}
+    <div class="search-page message">
+    <-- TODO: Add special page markup from Chapter 2 -->
+    </div>
+    {/block:SearchPage}
+
+    {block:TagPage}
+    <div class="tag-page message">
+    <-- TODO: Add special page markup from Chapter 2 -->
+    </div>
+    {/block:TagPage}
+
+    <main role="main" {block:IndexPage}data-columns{/block:IndexPage}>
+      {block:Posts}
+      <-- TODO: Add Posts markup from Chapter 2 -->
+      {/block:Posts}
+    </main>
+
+    {block:Pagination}
+    <nav class="pagination">
+      <ul>
+        {block:PreviousPage}<li><a href="{PreviousPage}">{lang:Previous}</a></li>{/block:PreviousPage}
+        {block:NextPage}<li><a href="{NextPage}">{lang:Next}</a></li>{/block:NextPage}
+      </ul>
+    </nav>
+    {/block:Pagination}
+
+    <-- TODO: Add JavaScript from Chapter 4 -->
+  </body>
+</html>

@@ -1,0 +1,173 @@
+/* Responsive content */
+iframe, img, embed, object, video {
+  max-width: 100%;
+}
+img {
+  height: auto;
+  width: auto;
+}
+
+/* Resets */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+ol, ul {
+  padding-left: 0;
+  list-style-position: inside;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+nav li {
+  display: inline;
+}
+input {
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.2em;
+}
+figure {
+  margin: 1em 0;
+}
+/* Typography */
+a {
+  text-decoration: none;
+{
+blockquote,
+.type-answer .caption {
+  margin: 0;
+  padding-left: 0.75em;
+  border-left: 0.2em solid #E0E0E0;
+}
+cite {
+  font-style: normal;
+  margin: 0.67em 0;
+  display: inline-block;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+/* Containers */
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Masthead */
+.masthead {
+  padding: 2.5%;
+  font-size: 1.2em;
+}
+.meta-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.portrait {
+  margin-right: 1em;
+  height: 128px;
+  width: 128px;
+}
+.portrait.global-shape-circle {
+  border-radius: 50%;
+}
+.blog-title {
+  font-size: 2.5em;
+  margin: 0;
+}
+.blog-description {
+  margin: 0;
+}
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+}
+.nav-wrapper nav {
+  float: left;
+  flex: 1 1 0%;
+}
+.nav-wrapper nav li {
+  margin-right: 1em;
+}
+
+/* Content */
+article {
+  background-color: #ffffff;
+  border-radius: 0.2em;
+  margin-bottom: 7%;
+  line-height: 1.5;
+}
+.is-permalink-page article {
+  width: 98.5%;
+}
+.contentinfo {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  padding: 2em;
+  background-color: #F6F6F6;
+}
+.contentinfo a {
+  margin-right: 0.5em;
+  color: #ADADAD;
+  line-height: 2;
+}
+.contentinfo .note,
+.tags li {
+  list-style-type: none;
+}
+.post-content {
+  margin: 0px;
+  display: inline-block;
+  width: 100%;
+  max-width: 55em;
+  padding: 2em;
+}
+.post-content .title {
+  margin-top: 0;
+}
+.type-chat .chat-lines {
+  margin: 0;
+  list-style-type: none;
+}
+.type-chat .chat-lines li {
+  margin: 1em 0;
+}
+.type-chat .chat-lines .label {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+}
+.type-link .link-name {
+  border-bottom: 2px solid;
+}
+.pagination {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+.pagination a {
+  padding: 1em 2em;
+}
+
+/* Special pages messages */
+.message {
+  font-size: 1.2em;
+  text-align: center;
+  margin: 2.5%;
+}
+.search_query {
+  font-weight: bold;
+}
