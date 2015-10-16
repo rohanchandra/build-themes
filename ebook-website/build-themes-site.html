@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{Title}</title>
+        <title>{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}</title>
         {block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
         <link rel="alternate" type="application/rss+xml" href="{RSS}">
         <link rel="shortcut icon" href="{Favicon}">
