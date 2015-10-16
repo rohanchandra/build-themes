@@ -288,7 +288,9 @@
         </div>
 
         <main role="main">
-        {block:Posts}{block:Text}
+        {block:Posts}
+
+        {block:Text}
           <article>
             <div id="metadata">
               <a href="#" id="post-chapter" class="js-hide"></a>
@@ -301,7 +303,21 @@
             {Body}
             </div>
           </article>
-        {/block:Text}{/block:Posts}
+        {/block:Text}
+
+        {block:Photo}
+        <article>
+          {LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />{LinkCloseTag}
+
+          {block:Caption}
+          <div class="inner-content">
+        	{Caption}
+          </div>
+          {/block:Caption}
+        </article>
+        {/block:Photo}
+
+        {/block:Posts}
         </main>
         {/block:PermalinkPage}
 
