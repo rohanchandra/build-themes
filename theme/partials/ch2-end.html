@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}</title>
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{Favicon}"/>
+    <link rel="alternate" type="application/rss+xml" href="{RSS}"/>
+    <link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}">
+
+    <link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/9Qenv9yn8/normalize.min.css" />
+    <link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/lT5nwa5y4/theme.css" />
+    <style>
+    /* TODO: JS: Grid layout from Chapter 4 */
+
+    /* TODO: JS: loading message from Chapter 4 */
+
+    /* TODO: Tumblr: Add CSS customization from Chapter 3 */
+    </style>
+  </head>
+
+  <body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}">
+    <header class="masthead" role="banner">
+      <div class="meta-wrapper">
+        {block:ShowAvatar}
+        <img class="portrait global-shape-{AvatarShape}" src="{PortraitURL-128}"/>
+        {/block:ShowAvatar}
+
+        <div class="blog-details">
+          {block:ShowTitle}
+          <h1 class="blog-title">
+            <a href="/" title="{lang:Home}">{Title}</a>
+          </h1>
+          {/block:ShowTitle}
+
+          {block:ShowDescription}
+          {block:Description}
+          <p class="blog-description">{Description}</p>
+          {block:Description}
+          {/block:ShowDescription}
+        </div>
+      </div>
+
+      <div class="nav-wrapper">
+        <nav>
+          <ul>
+              {block:HasPages}
+              {block:Pages}
+              <li>
+                <a href="{URL}">{Label}</a>
+              </li>
+              {/block:Pages}
+              {/block:HasPages}
+
+              {block:SubmissionsEnabled}
+              <li>
+                <a href="/submit">{SubmitLabel}</a>
+              </li>
+              {/block:SubmissionsEnabled}
+
+              {block:AskEnabled}
+              <li>
+                <a href="/ask">{AskLabel}</a>
+              </li>
+              {/block:AskEnabled}
+          </ul>
+        </nav>
+      </div>
+
+      <form action="/search" method="get">
+        <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
+      </form>
+    </header>
+
+    <!-- Search results -->
+    {block:SearchPage}
+    <div class="search-page message">
+      {block:SearchResults}
+      <p class="search-result">{lang:Search results for SearchQuery 2}</p>
+      {/block:SearchResults}
+
+      {block:NoSearchResults}
+      <p class="search-result">{lang:Sorry no results for SearchQuery 2}</p>
+      {/block:NoSearchResults}
+
+      <span class="divider"></span>
+    </div>
+    {/block:SearchPage}
+
+    {block:TagPage}
+    <div class="tag-page message">
+      <p class="tag-wrapper">{lang:Showing posts tagged Tag 2}</p>
+
+      <span class="divider"></span>
+    </div>
+    {/block:TagPage}
+
+    <main role="main">
+      {block:Posts}
+      <article>
+        {block:Text}
+        <div class="type-text post-content">
+          {block:Title}
+          <h2 class="title">
+            <a href="{Permalink}">{Title}</a>
+          </h2>
+          {/block:Title}
+
+          {Body}
+        </div>
+        {/block:Text}
+
+        {block:Photo}
+        <figure class="type-photo post-content">
+          {LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />{LinkCloseTag}
+
+          {block:Caption}
+          <figcaption class="caption">
+            {Caption}
+          </figcaption>
+          {/block:Caption}
+        </figure>
+        {/block:Photo}
+
+        {block:Photoset}
+        <figure class="type-photoset post-content">
+          {Photoset}
+
+          {block:Caption}
+          <figcaption class="caption">
+            {Caption}
+          </figcaption>
+          {/block:Caption}
+        </figure>
+        {/block:Photoset}
+
+        {block:Quote}
+        <div class="type-quote post-content">
+          <blockquote>{Quote}</blockquote>
+
+          {block:Source}
+          <cite class="caption">
+            {Source}
+          </cite>
+          {/block:Source}
+        </div>
+        {/block:Quote}
+
+        {block:Link}
+        <div class="type-link post-content">
+          <a {Target} href="{URL}" class="link-name">{Name}</a>
+
+          {block:Description}
+          <div class="caption">
+            {Description}
+          </div>
+          {/block:Description}
+        </div>
+        {/block:Link}
+
+        {block:Chat}
+        <div class="type-chat post-content">
+          <ul class="chat-lines">
+            {block:Lines}
+            <li>
+              {block:Label}<span class="label">{Label}</span>{/block:Label} {Line}
+            </li>
+            {/block:Lines}
+          </ul>
+        </div>
+        {/block:Chat}
+
+        {block:Audio}
+        <div class="type-audio post-content">
+          {block:AudioEmbed}
+              {AudioEmbed color="white"}
+          {/block:AudioEmbed}
+
+          {block:Caption}
+          <div class="caption">
+            {Caption}
+          </div>
+          {/block:Caption}
+        </div>
+        {/block:Audio}
+
+        {block:Video}
+        <div class="type-video post-content">
+          {Video-700}
+
+          {block:Caption}
+          <div class="caption">
+            {Caption}
+          </div>
+          {/block:Caption}
+        </div>
+        {/block:Video}
+
+        {block:Answer}
+        <div class="type-answer post-content">
+          <div class="question">
+            <p class="asker">
+              <span class="user-name">{Asker}</span>{block:English} asked{/block:English}:
+            </p>
+
+            <h2 class="title">{Question}</h2>
+          </div>
+
+          {block:Answerer}
+          <div class="answer">
+              <p class="answerer">
+                <span class="user-name">{Answerer}</span>{block:English} answered{/block:English}:
+              </p>
+
+              <div class="caption">
+                  {Answer}
+              </div>
+          </div>
+          {/block:Answerer}
+
+          <div class="replies">
+            {Replies}
+          </div>
+        </div>
+        {/block:Answer}
+
+        {block:Date}
+        <footer class="contentinfo" role="contentinfo">
+          <a href="{Permalink}" title="{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}">
+              {TimeAgo}
+          </a>
+
+          {block:NoteCount}
+          <a class="note-count" href="{Permalink}#notes">
+            {NoteCountWithLabel}
+          </a>
+          {/block:NoteCount}
+
+          {block:RebloggedFrom}
+          <a class="reblog-link" href="{ReblogParentURL}">
+            {ReblogParentName}
+          </a>
+          {/block:RebloggedFrom}
+
+          {block:PermalinkPage}
+
+          {block:HasTags}
+          <ul class="tags">
+            {block:Tags}<li><a href="{TagURL}">#{Tag}</a> </li>{/block:Tags}
+          </ul>
+          {/block:HasTags}
+
+          {block:PostNotes}
+          <div class="post-notes">
+            {PostNotes}
+          </div>
+          {/block:PostNotes}
+
+          {/block:PermalinkPage}
+        </footer>
+        {/block:Date}
+      </article>
+      {/block:Posts}
+    </main>
+
+    {block:Pagination}
+    <nav class="pagination">
+      <ul>
+        {block:PreviousPage}<li><a href="{PreviousPage}">{lang:Previous}</a></li>{/block:PreviousPage}
+        {block:NextPage}<li><a href="{NextPage}">{lang:Next}</a></li>{/block:NextPage}
+      </ul>
+    </nav>
+    {/block:Pagination}
+
+  </body>
+</html>
