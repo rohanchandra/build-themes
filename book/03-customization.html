@@ -1,0 +1,121 @@
+<p>One of the positives about Tumblr themes is the ability to quickly change your theme. From the customize panel, users can change colors, add images, custom text, add/remove parts of the theme and even change CSS properties.</p>
+<p>Customization is available in the theme documentation under <a href="http://www.tumblr.com/docs/en/custom_themes#appearance-options" title="Customization in documenation">appearance options</a>.</p>
+<p>All customization options are contained within a HTML <a href="http://www.w3.org/TR/html401/struct/global.html#h-7.4.4">meta</a> element with defaults passed through the content attribute.</p>
+<h2>Colors</h2>
+<p>Colors can be changed with a color picker from the customize panel by referencing the meta element in HTML and the name in the CSS.</p>
+<p><img src="https://41.media.tumblr.com/d04d5f02be2685cbe48e17a1c94b5ef0/tumblr_inline_nw98nw0zs21rtrl3v_500.png" /></p>
+<p><strong>Possible use:</strong> letting the users change the theme&rsquo;s background color.</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background};
+}
+&lt;/style&gt;</pre>
+<h2>Fonts</h2>
+<p>Tumblr provides a set of web-safe fonts that users can select from.</p>
+<p><img src="https://40.media.tumblr.com/c8f5b969b920eef1d9b8f8e18eaf208b/tumblr_inline_nw98ncif451rtrl3v_500.png" /></p>
+<p><strong>Possible use:</strong> give users the option to select their favorite font.</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;meta name="font:Body" content="Arial, Helvetica, sans-serif"/&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background};
+ font-family: {font:Body};
+}
+ &lt;/style&gt;
+</pre>
+<h2>Images</h2>
+<p>Images can be uploaded to Tumblr by users to include their own images for use as a background, masthead or decorative image.</p>
+<p>When passing a default value, upload your image as a theme asset in the customize panel.</p>
+<p><img src="https://40.media.tumblr.com/18d90eef7265ea747a859035167dd481/tumblr_inline_nw98p5K79w1rtrl3v_500.png" /></p>
+<p><strong>Possible use:</strong> setting the background image for the theme.</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;meta name="font:Body" content="Arial, Helvetica, sans-serif"/&gt;
+&lt;meta name="image:Background" content="http://static.tumblr.com/wgijwsy/O9sm6ds8v/subtle_zebra_3d.png"/&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background} url('{image:Background}') repeat;
+ font-family: {font:Body};
+}
+&lt;/style&gt;</pre>
+<h2>Conditional Blocks</h2>
+<p>Developers can create their own conditional blocks which load on the condition that the user selects the option.</p>
+<p>In the following example, the welcome text is only rendered when the value is set to <strong>1</strong>. To turn it off, by default, set it to <strong>0</strong>.</p>
+<p><img src="https://36.media.tumblr.com/89062eb463f0c3a015ba7005e0415300/tumblr_inline_nw98rq0QUf1rtrl3v_500.png" /></p>
+<p><strong>Possible use:</strong> displaying a welcome message, if the user wants to.</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;meta name="font:Body" content="Arial, Helvetica, sans-serif"/&gt;
+&lt;meta name="image:Background" content="http://static.tumblr.com/wgijwsy/O9sm6ds8v/subtle_zebra_3d.png"/&gt;
+&lt;meta name="if:Show welcome text" content="1"/&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background} url('{image:Background}') repeat;
+ font-family: {font:Body};
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+{block:IfShowWelcomeText}
+&lt;p&gt;Welcome to my blog&lt;/p&gt;
+{/block:IfShowWelcomeText}
+</pre>
+<h2>Custom text</h2>
+<p>Custom text comes in handy when dealing with user-specific text (such as an ID used in a <a href="https://www.google.com/analytics/web/">Google Analytics</a> script, or for adding custom text and titles masthead).</p>
+<p><img src="https://40.media.tumblr.com/28291ea6c1452e92f224be5460e838b5/tumblr_inline_nw98xh636K1rtrl3v_500.png" /></p>
+<p><strong>Possible use:</strong> letting the user write their own welcome text (continued from previous possible use).</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;meta name="font:Body" content="Arial, Helvetica, sans-serif"/&gt;
+&lt;meta name="image:Background" content="http://static.tumblr.com/wgijwsy/O9sm6ds8v/subtle_zebra_3d.png"/&gt;
+&lt;meta name="if:Show welcome text" content="1"/&gt;
+&lt;meta name="text:Welcome text" content="Hello world!"/&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background} url('{image:Background}') repeat;
+ font-family: {font:Body};
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+{block:IfShowWelcomeText}
+&lt;p&gt;{text:Welcome text}&lt;/p&gt;
+{/block:IfShowWelcomeText}
+</pre>
+<h2>Custom CSS</h2>
+<p><code>{CustomCSS}</code> is where users can add their own CSS without editing the HTML file. It is hidden under the advanced settings of the customize panel.</p>
+<p><img src="https://36.media.tumblr.com/5d3764ef3b70d34ce4e0e747f6afb710/tumblr_inline_nw98ujDEhL1rtrl3v_500.png" /></p>
+<p>If you plan on submitting to your theme to Tumblr, be sure to include the Custom CSS variable.</p>
+<p><strong>Possible use:</strong> let users customize their theme with CSS!</p>
+<pre class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="color:Background" content="#f4fbfa" /&gt;
+&lt;meta name="font:Body" content="Arial, Helvetica, sans-serif"/&gt;
+&lt;meta name="image:Background" content="http://static.tumblr.com/wgijwsy/O9sm6ds8v/subtle_zebra_3d.png"/&gt;
+&lt;style type="text/css"&gt;
+body {
+ background: {color:Background} url('{image:Background}') repeat;
+ font-family: {font:Body};
+}
+
+{CustomCSS}
+&lt;/style&gt;
+</pre>
+<h2>What you should know</h2>
+<ul>
+<li>How to let users customize their theme</li>
+</ul>

@@ -1,0 +1,20 @@
+<p><img src="https://41.media.tumblr.com/f87485bfddd71e3aa98214cda23ece03/tumblr_inline_nw91614wFi1rtrl3v_500.png" /></p>
+<p>The use of grid layouts in blogs are especially popular on the Tumblr platform, notably on Tumblr&rsquo;s many photo blogs. For the sample theme, a jQuery library called <a href="http://salvattore.com/">Salvattore</a> is used create this popular layout.</p>
+<h2>Adding plugins</h2>
+<p>The Salvattore library is used to remove the gaps which occur when floating in CSS to create a dynamic grid layout.</p>
+<p>JavaScript libraries used in a theme can be uploaded to as a theme asset, and put before the closing body tag of your HTML document:</p>
+<pre class="language-html">&lt;script src="//static.tumblr.com/xeccbfq/Qgqnv9yqb/jquery.min.js"&gt;&lt;/script&gt;<br />&lt;script src="//static.tumblr.com/xeccbfq/V7Fnvbb38/libs.min.js"&gt;&lt;/script&gt;</pre>
+<div class="note">
+<p>&ldquo;libs.min.js&rdquo; includes the multiple JavaScript libraries used in this book. They have been minified and combined into a single file to aid performance, by reducing the number of HTTP requests.</p>
+<p>Using Salvattore requires updating both the HTML and CSS of the theme.</p>
+<h2>Updating the HTML</h2>
+<p>Update the HTML to signal to Salvattore which elements should be used as the columns and grid container.</p>
+<p><code>{block:IndexPage}</code> and <code>{block:PermalinkPage}</code> are used so only the grid layout is shown on the index, and a column layout is shown on the permalink page:</p>
+<pre class="language-html">&lt;main role="main" {block:IndexPage}data-columns{/block:IndexPage}&gt;<br />    {block:Posts}<br />    &lt;article {block:PermalinkPage}class='js-column'{/block:PermalinkPage}&gt;</pre>
+</div>
+<h2>Updating the CSS</h2>
+<p>Salvattore is largely CSS driven and the column widths can be flexibly set so the theme remains responsive:</p>
+<pre class="language-css">  main[data-columns]::before {<br />	content: '4 .js-column.js-size-1of4';<br />  }<br />  main {<br />	margin-left: 1.75%;<br />	margin-right: 1.75%;<br />  }<br />  .js-column {<br />	float: left;<br />	margin-left: 0.75%;<br />	margin-right: 0.75%;<br />  }<br />  .js-size-1of1 {<br />	width: 98.5%;<br />  }<br />  .js-size-1of2 {<br />	 width: 48.5%;<br />   }<br />  .js-size-1of3 {<br />	width: 31.833333%;<br />  }<br />  .js-size-1of4 {<br />	width: 23.5%;<br />  }<br />  @media screen and (max-width: 1200px) {<br />	main[data-columns]::before {<br />	  content: '3 .js-column.js-size-1of3';<br />	}<br />  }<br />  @media screen and (max-width: 900px) {<br />	main[data-columns]::before {<br />	  content: '2 .js-column.js-size-1of2';<br />	}<br />	.meta-wrapper, .nav-wrapper {<br />	  display: inline-block;<br />	}<br />  }<br />  @media screen and (max-width: 550px){<br />	main[data-columns]::before {<br />		content: '1 .js-column.js-size-1of1';<br />	}<br />  }
+</pre>
+<p>Defining the CSS for the grid layout was largely a matter of following the <a href="http://salvattore.com/">documentation</a> available on the Salvattore website. When setting the widths of the columns, the margin&rsquo;s applied to the <code>main</code> and <code>.js-column</code>, should be subtracted to allow for a balanced grid look.</p>
+<p>The names of <code>main[data-columns]</code> and <code>.js-column</code> are from the defined the HTML above.</p>

@@ -1,0 +1,21 @@
+<p>One of the <a href="https://www.tumblr.com/docs/en/theme_submission_guidelines">qualities Tumblr is looking for</a> in the Tumblr themes is expressive interactions. Subtle animations are a great way to communicate state and to add an element of expressiveness to your theme.</p>
+<p>A fast and powerful method to add animation to websites is by using lightweight JavaScript library called <a href="http://julian.com/research/velocity/">Velocity.js</a>, by Julian Shapiro.</p>
+<h2>Adding plugins</h2>
+<p>Make sure you have followed the earlier <a href="http://buildthemes.tumblr.com/ch4/grid-layout">steps for adding the grid layout</a>.</p>
+<pre class="language-html">&lt;script src="//static.tumblr.com/xeccbfq/Qgqnv9yqb/jquery.min.js"&gt;&lt;/script&gt;<br />&lt;script src="//static.tumblr.com/xeccbfq/V7Fnvbb38/libs.min.js"&gt;&lt;/script&gt;</pre>
+<p>By adding the &ldquo;libs.min.js&rdquo; file in your theme, you can use the Velocity.js and Velocity.js <a href="http://julian.com/research/velocity/#uiPack">UI Pack</a> scripts.</p>
+<h2>Adding the JavaScript</h2>
+<p>The following is some sample JavaScript code which can be added to the theme&rsquo;s script section to display a loading message when the theme is loading, then transition the posts into view after loading is done.</p>
+<p>In the code there is a separation of what each part of the code does:</p>
+<ol>
+<li>config: an easy way for a developer (such as yourself!) to change how the code performs without having to spend the time to understand how all the JavaScript code works</li>
+<li>model: an object to hold data about where elements of the pages are (using references to the classes we defined in the CSS)</li>
+<li>view: for displaying the state visually</li>
+<li>controller: for linking between the model and the view, and also starting the program up with the &lsquo;init&rsquo; function.</li>
+</ol>
+<p>The sample code is as follows:</p>
+<pre class="language-html">    // Developer configuration<br />    var config = {<br />      transitions: true,<br />      loadingMessage: '{lang:Loading}...',<br />      loadingMessageClass: 'js-loading-message'<br />    };<br /><br />    // Data and theme state<br />    var model = {<br />      $articles: $('.js-column'),<br />      $masthead: $('.masthead'),<br />      $pagination: $('.pagination')<br />    };<br /><br />    // Displaying data and state<br />    var view = {<br />      showLoadingMessage: function() {<br />        this.$loadingMessage = $('&lt;p&gt;').text(config.loadingMessage).addClass(config.loadingMessageClass);<br />        this.$loadingMessage.appendTo('body');<br />      },<br />      hideLoadingMessage: function() {<br />        this.$loadingMessage.velocity("transition.slideDownOut", 500);<br />      },<br />      showContent: function() {<br />        model.$articles.velocity("transition.slideLeftIn", { duration: 500, stagger: 250 });<br />        model.$pagination.show();<br />      },<br />      hideContent: function() {<br />        model.$articles.hide();<br />        model.$pagination.hide();<br />      }<br />    };<br /><br />    // Manages view and data<br />    var controller = {<br />      init: function() {<br />        if (config.transitions) {<br />          view.hideContent();<br />          view.showLoadingMessage();<br />        }<br />      },<br />      onPageLoad: function() {<br />        if (config.transitions) {<br />          view.showContent();<br />          view.hideLoadingMessage();<br />        }<br />      }<br />    };<br /><br />    // Run controller and listen for load event<br />    controller.init();<br />    $(window).load(function() {<br />        controller.onPageLoad();<br />    });</pre>
+<h2>Updating the CSS</h2>
+<p>The loading message can then be styled with CSS:</p>
+<pre class="language-css">.js-loading-message {<br />  text-align: center;<br />  font-weight: bold;<br />  position: fixed;<br />  left: 0;<br />  bottom: 0;<br />  width: 100%;<br />  display: inline-block;<br />}
+</pre>

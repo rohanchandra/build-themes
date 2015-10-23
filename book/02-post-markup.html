@@ -1,0 +1,174 @@
+<p><img src="https://41.media.tumblr.com/3c353f7d7a9794689e95d184d322d51b/tumblr_inline_nw93faZMJk1rtrl3v_500.png" /></p>
+<p>Posts in Tumblr are divided into unique post types that users can create:</p>
+<ol>
+<li>Text</li>
+<li>Photo</li>
+<li>Photoset (accessed from the photo button, when more than one photo is added)</li>
+<li>Quote</li>
+<li>Link</li>
+<li>Chat</li>
+<li>Audio</li>
+<li>Video</li>
+<li>Answer (available in response to an &rsquo;<a href="http://staff.tumblr.com/post/320191537/ask" title="Tumblr ask">ask</a>&rsquo; from another Tumblr user)</li>
+</ol>
+<p>The Tumblr theme system only requires developers to create one HTML document. This HTML document includes all the markup to render all the nine different post types.</p>
+<p>At the most basic level our markup for the posts looks like this:</p>
+<pre class="language-html">{block:Posts}
+&lt;article&gt;
+{block:Text}
+&hellip;
+{/block:Text}
+{block:Photo}
+&hellip;
+{/block:Photo}
+{block:Photoset}
+&hellip;
+{/block:Photoset}
+{block:Quote}
+&hellip;
+{/block:Quote}
+{block:Link}
+&hellip;
+{/block:Link}
+{block:Chat}
+&hellip;
+{/block:Chat}
+{block:Audio}
+&hellip;
+{/block:Audio}
+{block:Video}
+&hellip;
+{/block:Video}
+{block:Answer}
+&hellip;
+{/block:Answer}
+&lt;/div&gt;  <br />
+&lt;footer class="contentinfo" role="contentinfo"&gt;
+
+&lt;/footer&gt;
+ &lt;/article&gt;
+{/block:Posts}
+</pre>
+<p>This means for each post the same footer is used with the post-specific code rendered in their own section.</p>
+<p>The code for each post type is explored below.</p>
+<h2>Text</h2>
+<p><img src="https://41.media.tumblr.com/aa8e36dba6f80b9dd8d1441b9cff3b6a/tumblr_inline_nw94baZgBw1rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Text}<br />&lt;div class="type-text post-content"&gt;<br />  {block:Title}<br />  &lt;h2 class="title"&gt;<br />	&lt;a href="{Permalink}"&gt;{Title}&lt;/a&gt;<br />  &lt;/h2&gt;<br />  {/block:Title}<br /><br />  {Body}<br />&lt;/div&gt;<br />{/block:Text}</pre>
+<p>Titles in text posts are optional, so must be wrapped with <code>{block: Title}</code>.</p>
+<p>The title is linked to the <a href="http://en.wikipedia.org/wiki/Permalink">permalink</a>, which points to the exact URL of a blog post, so readers can view and access a single blog post.</p>
+<p>In the CSS, there is styling for posts&rsquo; main headings, so a class of title has been included on all major titles in posts.</p>
+<p><code>{Body}</code> is the content the user has added in the post section.</p>
+<h2>Photo</h2>
+<p><img src="https://40.media.tumblr.com/23f577fa753c2065cdc1f883cdef9120/tumblr_inline_nw94brGiyk1rtrl3v_500.png" /></p>
+<h3>Camera information</h3>
+<p>Information about the photo&rsquo;s camera was introduced to Tumblr themes in 2011, to fetch <a href="http://en.wikipedia.org/wiki/Exchangeable_image_file_format#Background" title="About Exif on Wikipedia">Exif data</a> from a photo.</p>
+<p>Exif data is not used in the example theme, however to display Exif data the following variables and blocks are helpful:</p>
+<pre class="language-html">{block:Exif}
+&lt;ul class="exif"&gt;
+&lt;li&gt;{block:Camera}Camera: {Camera}{/block:Camera}&lt;/li&gt;
+&lt;li&gt;{block:Aperture}Aperture: {Aperture}{/block:Aperture}&lt;/li&gt;
+&lt;li&gt;{block:Exposure}Exposure: {Exposure}{/block:Exposure}&lt;/li&gt;
+&lt;li&gt;{block:FocalLength}Focal Length: {FocalLength}{/block:FocalLength}&lt;/li&gt;
+&lt;/ul&gt;{/block:Exif}
+</pre>
+<h3>Displaying a photo</h3>
+<pre class="language-html">{block:Photo}<br />&lt;figure class="type-photo post-content"&gt;<br />  {LinkOpenTag}&lt;img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" /&gt;{LinkCloseTag}<br /><br />  {block:Caption}<br />  &lt;figcaption class="caption"&gt;<br />	{Caption}<br />  &lt;/figcaption&gt;<br />  {/block:Caption}<br />&lt;/figure&gt;<br />{/block:Photo}
+</pre>
+<p><code>{LinkOpenTag}</code> inserts <code>&lt;a href="http://www.example.com/"&gt;</code> while <code>{LinkCloseTag}</code> inserts <code>&lt;/a&gt;</code>. In effect, it is the same as the usual HTML for creating a link.</p>
+<p>The URL points to the click-through URL which users have set for the photo. This variable also renders conditionally like a block.</p>
+<p><code>{PhotoURL-HighRes}</code> links to the web address of the photo with a maximum width of a 1280px wide image where possible (if this is not possible, then the next largest size is provided). The Tumblr server can also provide images in 500, 400, 250, 100px wide or square (75px by 75px).</p>
+<p>Only the provided sizes can be used, anything over or below the numbers in the documentation does not load.</p>
+<p>The caption is optional, and so is included in <code>{block:Caption}.</code></p>
+<h2>Photoset</h2>
+<p><img src="https://41.media.tumblr.com/ac525cffbb72b66cc2a40bcea2a473b6/tumblr_inline_nw94cfDs8Q1rtrl3v_500.png" /></p>
+<p>Creating a photoset is triggered when users have uploaded more than one photo in a &lsquo;photo&rsquo; post.</p>
+<pre class="language-html">{block:Photoset}<br />&lt;figure class="type-photoset post-content"&gt;<br />  {Photoset}<br /><br />  {block:Caption}<br />  &lt;figcaption class="caption"&gt;<br />	{Caption}<br />  &lt;/figcaption&gt;<br />  {/block:Caption}<br />&lt;/figure&gt;<br />{/block:Photoset}
+</pre>
+<p>The <code>{Photoset}</code> can also be made to a fixed width of either: 700, 500, 400 or 250px in width.</p>
+<p>Tumblr automatically inserts an iframe with the photoset to manage the layout of multiple images into rows and columns.</p>
+<p>Alternatively, you can manage the photoset layout yourself or use a JavaScript plugin such as <a href="https://github.com/PixelUnion/Extended-Tumblr-Photoset">PXU Photoset Extended</a> or <a href="https://github.com/stylehatch/photoset-grid">Photoset Grid</a>.</p>
+<h2>Quote</h2>
+<p><img src="https://40.media.tumblr.com/e0e1f1e2ea4deafb3f8d05a310f2c3d5/tumblr_inline_nw94dpnXNp1rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Quote}<br />&lt;div class="type-quote post-content"&gt;<br />  &lt;blockquote&gt;{Quote}&lt;/blockquote&gt;<br /><br />  {block:Source}<br />  &lt;cite class="caption"&gt;<br />	{Source}<br />  &lt;/cite&gt;<br />  {/block:Source}<br />&lt;/div&gt;<br />{/block:Quote}
+</pre>
+<h2>Link</h2>
+<p><img src="https://40.media.tumblr.com/d192950647df11cda7e7f327fae9ad4a/tumblr_inline_nw94fbe8x51rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Link}<br />&lt;div class="type-link post-content"&gt;<br />  &lt;a {Target} href="{URL}" class="link-name"&gt;{Name}&lt;/a&gt;<br /><br />  {block:Description}<br />  &lt;div class="caption"&gt;<br />	{Description}<br />  &lt;/div&gt;<br />  {/block:Description}<br />&lt;/div&gt;<br />{/block:Link}
+</pre>
+<h2>Chat</h2>
+<p><img src="https://41.media.tumblr.com/6178cba809499471b794cf349fa41ce9/tumblr_inline_nw94fj8Hbj1rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Chat}<br />&lt;div class="type-chat post-content"&gt;<br />  &lt;ul class="chat-lines"&gt;<br />	{block:Lines}<br />	&lt;li&gt;<br />	  {block:Label}&lt;span class="label"&gt;{Label}&lt;/span&gt;{/block:Label} {Line}<br />	&lt;/li&gt;<br />	{/block:Lines}<br />  &lt;/ul&gt;<br />&lt;/div&gt;<br />{/block:Chat}
+</pre>
+<p><code>{block:Lines}</code> is the code looped through for each line of the chat post. In the example code, a list item is made for each line of dialogue.</p>
+<p><code>{Label}</code> is the name of the speakers, which Tumblr automatically parses from the post, while <code>{Line}</code> is the text automatically identified as the dialogue.</p>
+<h2>Audio</h2>
+<p><img src="https://41.media.tumblr.com/bd841f8144160c187a6d67a85e2af975/tumblr_inline_nw94ftFtD51rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Audio}<br />&lt;div class="type-audio post-content"&gt;<br />  {block:AudioEmbed}<br />	  {AudioEmbed color="white"}<br />  {/block:AudioEmbed}<br /><br />  {block:Caption}<br />  &lt;div class="caption"&gt;<br />	{Caption}<br />  &lt;/div&gt;<br />  {/block:Caption}<br />&lt;/div&gt;<br />{/block:Audio}
+</pre>
+<p><code>{AudioEmbed}</code> is another variable that, much like the photoset variable, automatically generates a layout for audio files.</p>
+<p>Tumblr can also parse audio <a href="http://www.id3.org/">ID3 tags</a> which contain information about the audio. Tumblr supports these ID3 tags:</p>
+<ul>
+<li><code>{block:AlbumArt}{AlbumArtURL}{/block:AlbumArt}</code></li>
+<li><code>{block:Artist}{Artist}{/block:Artist}</code></li>
+<li><code>{block:Album}{Album}{/block:Album}</code></li>
+<li><code>{block:TrackName}{TrackName}{/block:TrackName}</code></li>
+</ul>
+<p>This is useful when displaying information unique to a track.</p>
+<h2>Video</h2>
+<p><img src="https://40.media.tumblr.com/c89d2ae481908e4d28470cf6e91afd49/tumblr_inline_nw94g2xd2C1rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Video}<br />&lt;div class="type-video post-content"&gt;<br />  {Video-700}<br /><br />  {block:Caption}<br />  &lt;div class="caption"&gt;<br />	{Caption}<br />  &lt;/div&gt;<br />  {/block:Caption}<br />&lt;/div&gt;<br />{/block:Video}
+</pre>
+<p>Video posts are quick to implement. Just use <code>{Video-700}</code>, the other widths are 500, 400 or 250, and Tumblr will take care of the rest.</p>
+<h2>Answer</h2>
+<p><img src="https://40.media.tumblr.com/c1740d7a3a8eb9f31f39c71a92077381/tumblr_inline_nw94phaPIN1rtrl3v_500.png" /></p>
+<pre class="language-html">{block:Answer}<br />&lt;div class="type-answer post-content"&gt;<br />  &lt;div class="question"&gt;<br />	&lt;p class="asker"&gt;<br />	  &lt;span class="user-name"&gt;{Asker}&lt;/span&gt;{block:English} asked{/block:English}:<br />	&lt;/p&gt;<br /><br />	&lt;h2 class="title"&gt;{Question}&lt;/h2&gt;<br />  &lt;/div&gt;<br /><br />  {block:Answerer}<br />  &lt;div class="answer"&gt;<br />	  &lt;p class="answerer"&gt;<br />		&lt;span class="user-name"&gt;{Answerer}&lt;/span&gt;{block:English} answered{/block:English}:<br />	  &lt;/p&gt;<br /><br />	  &lt;div class="caption"&gt;<br />		  {Answer}<br />	  &lt;/div&gt;<br />  &lt;/div&gt;<br />  {/block:Answerer}<br /><br />  &lt;div class="replies"&gt;<br />	{Replies}<br />  &lt;/div&gt;<br />&lt;/div&gt;<br />{/block:Answer}
+</pre>
+<p>An answer post can be grouped into the following components:</p>
+<ol>
+<li>question: a question from any Tumblr user</li>
+<li>answerer: an answer to the question by a Tumblr user</li>
+<li>replies: things other users have added onto the post by reblogging and writing a comment</li>
+</ol>
+<p>Note that question and answers can be from an external blog as answer posts can be reblogged.</p>
+<h2>Adding a post footer</h2>
+<p>Adding a footer to a post is a useful way to show information about posts.</p>
+<p>In the footer, we&rsquo;ll display metadata about the post including:</p>
+<ul>
+<li>Date the post was published on</li>
+<li>The number of notes (likes and reblogs) a post has received</li>
+<li>Source of the post</li>
+<li>Tags</li>
+<li>List of notes</li>
+</ul>
+<pre class="language-html">{block:Date}<br />&lt;footer class="contentinfo" role="contentinfo"&gt;<br />  &lt;a href="{Permalink}" title="{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}"&gt;<br />	  {TimeAgo}<br />  &lt;/a&gt;<br /><br />  {block:NoteCount}<br />  &lt;a class="note-count" href="{Permalink}#notes"&gt;<br />	{NoteCountWithLabel}<br />  &lt;/a&gt;<br />  {/block:NoteCount}<br /><br />  {block:RebloggedFrom}<br />  &lt;a class="reblog-link" href="{ReblogParentURL}"&gt;<br />	{ReblogParentName}<br />  &lt;/a&gt;<br />  {/block:RebloggedFrom}<br /><br />  {block:PermalinkPage}<br /><br />  {block:HasTags}<br />  &lt;ul class="tags"&gt;<br />	{block:Tags}&lt;li&gt;&lt;a href="{TagURL}"&gt;#{Tag}&lt;/a&gt; &lt;/li&gt;{/block:Tags}<br />  &lt;/ul&gt;<br />  {/block:HasTags}<br /><br />  {block:PostNotes}<br />  &lt;div class="post-notes"&gt;<br />	{PostNotes}<br />  &lt;/div&gt;<br />  {/block:PostNotes}<br /><br />  {/block:PermalinkPage}<br />&lt;/footer&gt;<br />{/block:Date}
+</pre>
+<h3>Footer metadata on the permalink and index pages</h3>
+<pre class="language-html">  &lt;a href="{Permalink}" title="{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}"&gt;<br />	  {TimeAgo}<br />  &lt;/a&gt;<br /><br />  {block:NoteCount}<br />  &lt;a class="note-count" href="{Permalink}#notes"&gt;<br />	{NoteCountWithLabel}<br />  &lt;/a&gt;<br />  {/block:NoteCount}<br /><br />  {block:RebloggedFrom}<br />  &lt;a class="reblog-link" href="{ReblogParentURL}"&gt;<br />	{ReblogParentName}<br />  &lt;/a&gt;<br />  {/block:RebloggedFrom}
+</pre>
+<p>On the theme&rsquo;s index page, only essential information about the post is shown to save space.</p>
+<pre class="language-html">&lt;a href="{Permalink}" title="{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}"&gt;<br />  {TimeAgo}<br />&lt;/a&gt;
+</pre>
+<p>This uses the variables <code>{TimeAgo</code><code>}</code> to format the date and links to the post&rsquo;s permanent link (<code>{Permalink}</code>).</p>
+<p>It is good practice to integrate a permalink for each post. If a permalink is not used, then users can&rsquo;t visit the permanent link for post types such as quotes and video which have no title. Additionally, users are not forced to include a title in some post types such as text.</p>
+<pre class="language-html">{block:NoteCount}<br />&lt;a class="note-count" href="{Permalink}#notes"&gt;<br />{NoteCountWithLabel}<br />&lt;/a&gt;<br />{/block:NoteCount}
+</pre>
+<p>The note count refers to the number of likes and reblogs a post has received in Tumblr.</p>
+<p>For the note count, the permalink points to the section of the post with an ID of &ldquo;notes&rdquo;.</p>
+<pre class="language-html">{block:RebloggedFrom}<br />&lt;a class="reblog-link" href="{ReblogParentURL}"&gt;<br />{ReblogParentName}<br />&lt;/a&gt;<br />{/block:RebloggedFrom}
+</pre>
+<p><code>{block:RebloggedFrom}</code> is used to provide attribution for posts which are from external sources. It is good practice to attribute the source of the original work.</p>
+<h3>Footer on permalink pages</h3>
+<pre class="language-html">  {block:PermalinkPage}<br /><br />  {block:HasTags}<br />  &lt;ul class="tags"&gt;<br />	{block:Tags}&lt;li&gt;&lt;a href="{TagURL}"&gt;#{Tag}&lt;/a&gt; &lt;/li&gt;{/block:Tags}<br />  &lt;/ul&gt;<br />  {/block:HasTags}<br /><br />  {block:PostNotes}<br />  &lt;div class="post-notes"&gt;<br />	{PostNotes}<br />  &lt;/div&gt;<br />  {/block:PostNotes}<br /><br />  {/block:PermalinkPage}
+</pre>
+<p>When a post is rendered on a permalink page, more information is shown. In the footer, a list of tags links to posts which have the same tag.</p>
+<p>The post notes is also shown. These notes record which users liked or reblogged each post on Tumblr.</p>
+<h3>Tying up</h3>
+<p>At the end of our code there is a closing block:</p>
+<pre class="language-html">&lt;/article&gt;<br />{/block:Posts}
+</pre>
+<p>The <code>&lt;/article&gt;</code> closes off the article element for <strong>each</strong> of the posts.</p>
+<h2>What you should know</h2>
+<ul>
+<li>How to markup posts considering the different needs for each post type</li>
+<li>Adding metadata to posts using a footer</li>
+</ul>

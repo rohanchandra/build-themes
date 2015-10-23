@@ -1,0 +1,47 @@
+<p>Tumblr themes have two operators, which allow you to display user data in your themes, called variables and blocks.</p>
+<p>These operators are placed in your theme&rsquo;s HTML, which is then parsed by Tumblr&rsquo;s servers.</p>
+<h2>Variables</h2>
+<p>Variables refers to data which should be outputted. Variable names are wrapped in curly brackets (also known as braces), for example <code>{variable name}</code>.</p>
+<p>One example of a variable, <a href="https://www.tumblr.com/docs/en/custom_themes#basic_variables">defined in the theme documentation</a>, is the Title variable. To use the blog&rsquo;s title in HTML you would type:</p>
+<pre class="language-html">&lt;a href="/"&gt;{Title}&lt;/a&gt;
+</pre>
+<p>Since tiles of blogs vary, you should not hard code a specific title, instead use a variable.</p>
+<p>On this website (which I have named &lsquo;Build Themes&rsquo; in the customize panel), the theme code is processed server-side by Tumblr, and then outputted in the client-side HTML as:</p>
+<pre class="language-html">&lt;a href="/"&gt;Build Themes&lt;/a&gt;</pre>
+<p>Notice how the user never sees the variable you used to display the title, variables are transformed into the actual data by a server.</p>
+<h2>Blocks</h2>
+<p>Blocks are used to iterate through a set of data and/or conditionally render HTML (that is, if something is or isn&rsquo;t available).</p>
+<h3>Iterating through data</h3>
+<p>The first use of blocks is to loop through a set of data.</p>
+<p>Here&rsquo;s an example that uses <code>{block:Posts}</code> to display &ldquo;Posted on Tumblr&rdquo; on every single post:</p>
+<pre class="language-html">{block:Posts} &lt;p&gt;Posted on Tumblr&lt;/p&gt; {/block:Posts}
+</pre>
+<p>This use of blocks is telling the Tumblr servers that for each post in the posts data, some some text should be displayed (namely, &ldquo;Posted on Tumblr&rdquo;).</p>
+<p>Instead of manually adding the desired HTML markup to every single post, blocks are used to reduce duplicate code.</p>
+<h3>Conditionally rendering</h3>
+<p>Blocks can also render on a simple condition which tests if data are available.</p>
+<p>For example, you may use a block to see if the blog has any text posts to display.</p>
+<p>Building on the previous example, we can limit to rendering the text <em>if</em> the post is a photo post.</p>
+<pre class="language-html">{block:Posts}
+{block:Photo}<br />&lt;p&gt;Posted on Tumblr&lt;/p&gt;<br />{/block:Photo}
+{/block:Posts}
+</pre>
+<p>This comes very useful when we want to render different content for each post type.</p>
+<h3>Putting it all together</h3>
+<p><img alt="Example of pagination buttons" src="https://33.media.tumblr.com/tumblr_m6f63uVgN01qzcnez.png" /></p>
+<p>This is the HTML used for rendering pagination on Tumblr blogs.</p>
+<p>Pagination refers to the &lsquo;next page&rsquo; and &lsquo;previous page&rsquo; links commonly seen on blogs, and allows for navigation between older and newer posts.</p>
+<pre class="language-html">{block:Pagination}<br />&lt;nav class="pagination"&gt;<br />  &lt;ul&gt;<br />    {block:PreviousPage}&lt;li&gt;&lt;a href="{PreviousPage}"&gt;{lang:Previous}&lt;/a&gt;&lt;/li&gt;{/block:PreviousPage}<br />    {block:NextPage}&lt;li&gt;&lt;a href="{NextPage}"&gt;{lang:Next}&lt;/a&gt;&lt;/li&gt;{/block:NextPage}<br />  &lt;/ul&gt;<br />&lt;/nav&gt;<br />{/block:Pagination}
+</pre>
+<p>Firstly, <code>{block:Pagination}</code> asks &ldquo;do we have more than one page?&rdquo;. If this is true, the following markup is processed.</p>
+<p><code>{block:NextPage}</code> asks &ldquo;do we have a next page?&rdquo;. This only renders if there is more content to load. For example, if the reader is on the last page of content, there is no need to display a &ldquo;next page&rdquo; link.</p>
+<p><code>{block:PreviousPage}</code> asks &ldquo;do we have a previous page?&rdquo;. This only renders if there is a page to go back to. This is helpful if you are already on page one of a blog, since there is no &ldquo;page zero&rdquo; to visit.</p>
+<p><code>{PreviousPage}</code> and <code>{NextPage}</code> are variables for the hyperlink, relative to what page the reader is on. For example, if the reader is on the third page of the blog, <code>{PreviousPage}</code> links to the second page, and <code>{NextPage}</code> links to the fourth page.</p>
+<h2>Documentation</h2>
+<p>Tumblr keeps a list of variables and blocks which can be used in the <a href="http://www.tumblr.com/docs/en/custom_themes/">theme documentation</a>.</p>
+<p><img src="https://40.media.tumblr.com/31f398d74aefb3d75651374f1b0d5e6f/tumblr_inline_nw8ymr5N6t1rtrl3v_500.png" /></p>
+<h2>What you should know</h2>
+<ul>
+<li>Variables are used to output user data</li>
+<li>Blocks are used to iterate through data or test a condition</li>
+</ul>

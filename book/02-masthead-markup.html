@@ -1,0 +1,36 @@
+<p>The completed HTML for the masthead will look like this:</p>
+<pre class="language-html">&lt;header class="masthead" role="banner"&gt;<br />  &lt;div class="meta-wrapper"&gt;<br />    {block:ShowAvatar}<br />    &lt;img class="portrait global-shape-{AvatarShape}" src="{PortraitURL-128}"/&gt;<br />    {/block:ShowAvatar}<br /><br />    &lt;div class="blog-details"&gt;<br />      {block:ShowTitle}<br />      &lt;h1 class="blog-title"&gt;<br />        &lt;a href="/" title="{lang:Home}"&gt;{Title}&lt;/a&gt;<br />      &lt;/h1&gt;<br />      {/block:ShowTitle}<br /><br />      {block:ShowDescription}<br />      {block:Description}<br />      &lt;p class="blog-description"&gt;{Description}&lt;/p&gt;<br />      {block:Description}<br />      {/block:ShowDescription}<br />    &lt;/div&gt;<br />  &lt;/div&gt;<br /><br />  &lt;div class="nav-wrapper"&gt;<br />    &lt;nav&gt;<br />      &lt;ul&gt;<br />          {block:HasPages}<br />          {block:Pages}<br />          &lt;li&gt;<br />            &lt;a href="{URL}"&gt;{Label}&lt;/a&gt;<br />          &lt;/li&gt;<br />          {/block:Pages}<br />          {/block:HasPages}<br /><br />          {block:SubmissionsEnabled}<br />          &lt;li&gt;<br />            &lt;a href="/submit"&gt;{SubmitLabel}&lt;/a&gt;<br />          &lt;/li&gt;<br />          {/block:SubmissionsEnabled}<br /><br />          {block:AskEnabled}<br />          &lt;li&gt;<br />            &lt;a href="/ask"&gt;{AskLabel}&lt;/a&gt;<br />          &lt;/li&gt;<br />          {/block:AskEnabled}<br />      &lt;/ul&gt;<br />    &lt;/nav&gt;<br />  &lt;/div&gt;<br /><br />  &lt;form action="/search" method="get"&gt;<br />    &lt;input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/&gt;<br />  &lt;/form&gt;<br />&lt;/header&gt;</pre>
+<p>Once rendered, the theme will look something like this:</p>
+<p><img src="https://40.media.tumblr.com/c3f0677dc1479eebfac90544459c9ce5/tumblr_inline_nw96h5q1rz1rtrl3v_500.png" /></p>
+<p>The following sections will discuss the markup used.</p>
+<h2>Metadata: avatar, title, description</h2>
+<p><img src="https://40.media.tumblr.com/96ab4313d6c8d41db2ad0442c9152799/tumblr_inline_nwa7k5yPNx1rtrl3v_500.png" /></p>
+<pre class="language-html">&lt;div class="meta-wrapper"&gt;<br />  {block:ShowAvatar}<br />  &lt;img class="portrait global-shape-{AvatarShape}" src="{PortraitURL-128}"/&gt;<br />  {/block:ShowAvatar}<br /><br />  &lt;div class="blog-details"&gt;<br />    {block:ShowTitle}<br />    &lt;h1 class="blog-title"&gt;<br />      &lt;a href="/" title="{lang:Home}"&gt;{Title}&lt;/a&gt;<br />    &lt;/h1&gt;<br />    {/block:ShowTitle}<br /><br />    {block:ShowDescription}<br />    {block:Description}<br />    &lt;p class="blog-description"&gt;{Description}&lt;/p&gt;<br />    {block:Description}<br />    {/block:ShowDescription}<br />  &lt;/div&gt;<br />&lt;/div&gt;</pre>
+<p>In the metadata we are showing a title, avatar, and description, dependent on the blog&rsquo;s <a href="https://www.tumblr.com/docs/en/custom_themes#global_appearance">global appearance settings</a>, by using <code>{block:ShowAvatar}</code>, <code>{block:ShowTitle} </code>and <code>{block:ShowDescription}</code>.</p>
+<p>Referencing a global appearance setting from the documentation, makes the option appear in the customize panel:</p>
+<p><img src="https://40.media.tumblr.com/53f5b9e04d188862a7d7e636e67fe416/tumblr_inline_nwa7ns2cVd1rtrl3v_500.png" /></p>
+<p>Global appearance options are different from some of the &lsquo;local&rsquo; customization options, discussed later in <a href="http://buildthemes.tumblr.com/ch3">Chapter 3</a>, as they also affect how the blog appears in the dashboard and on mobile devices. For instance, changing the global avatar shape to rounded, will also modify how it appears in the dashboard when the blog name is hovered over:</p>
+<p><img src="https://40.media.tumblr.com/3b1b16f6242b92e922e7c8795e6f62e2/tumblr_inline_nwa7y8ZUzf1rtrl3v_500.png" /></p>
+<h2>Pages</h2>
+<p><img src="https://36.media.tumblr.com/a47f9b8359a8529161fc2ac282464a85/tumblr_inline_nwa7kliZ5L1rtrl3v_500.png" /></p>
+<p>Pages come in a couple of varieties:</p>
+<ul>
+<li><a href="http://www.tumblr.com/docs/en/using_messages#ask" title="How to use Ask in Tumblr">Ask</a> and <a href="http://www.tumblr.com/docs/en/using_messages#submit" title="How to use submit in Tumblr">submit pages</a></li>
+<li>Redirects to other websites</li>
+<li>Standard pages or pages with custom HTML</li>
+</ul>
+<p>To add standard pages, redirects and custom HTML pages, go to the customize panel for your blog and select &ldquo;add a page&rdquo;. Different page types are accessible from the drop-down menu.</p>
+<p>Redirection pages are helpful for sending users to other websites and linking to profiles on social networks. Tumblr sends a HTTP status code of 301, signalling a permanent redirection.</p>
+<p><img src="https://40.media.tumblr.com/adeb087eaa4683c00cd349317585f99f/tumblr_inline_nw95zxrOeV1rtrl3v_500.png" /></p>
+<p>For ask and submit pages, themes need to recognize if the setting is enabled via the dashboard settings panel.</p>
+<p><img src="https://36.media.tumblr.com/fd9abb829cb5e467f8507b32a1bf4d96/tumblr_inline_nw962bkNwk1rtrl3v_500.png" /></p>
+<p>The code for the navigation is:</p>
+<pre class="language-html">&lt;div class="nav-wrapper"&gt;<br />  &lt;nav&gt;<br />    &lt;ul&gt;<br />        {block:HasPages}<br />        {block:Pages}<br />        &lt;li&gt;<br />          &lt;a href="{URL}"&gt;{Label}&lt;/a&gt;<br />        &lt;/li&gt;<br />        {/block:Pages}<br />        {/block:HasPages}<br /><br />        {block:SubmissionsEnabled}<br />        &lt;li&gt;<br />          &lt;a href="/submit"&gt;{SubmitLabel}&lt;/a&gt;<br />        &lt;/li&gt;<br />        {/block:SubmissionsEnabled}<br /><br />        {block:AskEnabled}<br />        &lt;li&gt;<br />          &lt;a href="/ask"&gt;{AskLabel}&lt;/a&gt;<br />        &lt;/li&gt;<br />        {/block:AskEnabled}<br />    &lt;/ul&gt;<br />  &lt;/nav&gt;<br />&lt;/div&gt;
+</pre>
+<p>The above code is placed after the metadata section.</p>
+<p>For pages, the code tests if the user has any pages, has ask enabled and/or has submissions enabled.</p>
+<p>Since users choose their own page titles (including for ask and submit pages), variables have been used.</p>
+<h2>Search</h2>
+<p><img src="https://41.media.tumblr.com/8b2b13b15a3b6148830115e0f3ff80e5/tumblr_inline_nwa7kx3sGF1rtrl3v_500.png" /></p>
+<pre class="language-html">&lt;form action="/search" method="get"&gt;<br />  &lt;input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/&gt;<br />&lt;/form&gt;</pre>
+<p>Implementing search only requires a standard HTML form with the value set to the user&rsquo;s query: <code>{SearchQuery}</code>. The entire search implementation is handled by Tumblr.</p>

@@ -1,0 +1,28 @@
+<p>The best Tumblr themes are flexible and customizable. Additionally, themes should come with sensible design defaults, as some users do not adjust customizable elements such as the font of a theme.</p>
+<p>The CSS for themes which include Tumblr variables or blocks must be kept inline. In that, the CSS must be kept within the HTML document, not in an external CSS file. This is because CSS in external files are not parsed by Tumblr for variables and blocks.</p>
+<p>The sample theme has these customizable features:</p>
+<ol>
+<li>fonts for the title and body</li>
+<li>colors for the masthead and body text and links</li>
+<li>background image</li>
+<li>support for additional global appearance features</li>
+</ol>
+<p>Towards the top of the example theme HTML file, after the meta description element, define the meta elements:</p>
+<pre class="language-html">{block:Hidden}<br />&lt;meta name="font:Title" content="Brutal Type"/&gt;<br />&lt;meta name="font:Body" content="Sofia Pro"/&gt;<br />&lt;meta name="color:Masthead text and links" content="{TitleColor}"/&gt;<br />&lt;meta name="color:Body text" content="#313131"/&gt;<br />&lt;meta name="image:Background" content=""/&gt;<br />{/block:Hidden}</pre>
+<p><code>{block:Hidden}</code> is used to prevent the meta elements from being rendered on the Tumblr blog&rsquo;s HTML, as the meta elements are only used by Tumblr in the customize panel.</p>
+<p>As <a href="http://buildthemes.tumblr.com/ch3/customization">discussed earlier</a>, once you have defined the meta elements, and specified the default values within &ldquo;content&rdquo;, it is now only a case of referencing the same meta elements in the CSS.</p>
+<h2>Custom fonts</h2>
+<pre class="language-html">body {<br />  font-family: {font:Body};<br />}<br />h1, h2, h3, h4, h5, h6 {<br />  font-family: {font:Title};<br />}</pre>
+<p>Implementing the custom fonts with CSS, requires referencing the font meta names from above, with the font-family property.</p>
+<h2>Custom colors</h2>
+<pre class="language-html">body {<br />  color: {color:Body text};<br />}<br />.masthead {<br />  color: {color:Masthead text and links};<br />}<br />.masthead a {<br />  color: {color:Masthead text and links};<br />}
+</pre>
+<p>Again referencing the names from above, and setting the hex CSS color.</p>
+<h2>Custom image</h2>
+<pre class="language-html">body {<br />  background-image: url('{image:Background}');<br />}</pre>
+<p>Since we are referencing an external image file, the variable <code>{image:Background}</code>variable should be wrapped within <code>url('')</code>.</p>
+<h2>Global appearance options</h2>
+<pre class="language-html">body {<br />  background-color: {BackgroundColor};<br />}<br />.blog-title a {<br />  font-weight: {TitleFontWeight};<br />}<br />a {<br />  color: {AccentColor};<br />}</pre>
+<p>As <a href="http://buildthemes.tumblr.com/ch2/masthead-markup">used earlier for the masthead</a>, we can define more <a href="https://www.tumblr.com/docs/en/custom_themes#global_appearance">global appearance options, </a>this time referencing them in CSS, rather than HTML.</p>
+<p>The referencing method for global appearance options is similar to the local appearance options, however since the global appearance options are defined for all Tumblr themes, there is no need to prefix the variable with the type of meta element (for example, the <code>{color:}</code> prefix is not required for <code>{AccentColor}</code>).</p>
+<p>Additionally, there is not a requirement to explicitly define the meta element for global appearance options.</p>

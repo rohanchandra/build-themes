@@ -1,0 +1,8 @@
+<p>When developing a blog theme, you will often display text in the user interface, such as &ldquo;next page&rdquo; in pagination and &ldquo;posted on&rdquo; in a blog post&rsquo;s metadata.</p>
+<p>Since Tumblr can be used in multiple languages including French, Japanese, Portuguese and Spanish, it is important for the theme to display text in the relevant language to the user.</p>
+<p>Tumblr solves this problem with localized text, which are a set of commonly-used words which have been translated by Tumblr. Tumblr says &ldquo;ideally, no language-specific writing should appear in Tumblr themes&rdquo;.</p>
+<p>Localizing follows a familiar pattern of <code>{lang:<strong>x</strong>}</code>, replacing <strong>x</strong> with the word you are translating in the HTML markup. Only words which appear in the <a href="http://www.tumblr.com/docs/en/localizing_themes">list of localized words </a>can be used.</p>
+<p>Here is an example with no localization on the first line and localization on the second line:</p>
+<pre class="language-html">&lt;h2&gt;About me&lt;/h2&gt;
+&lt;h2&gt;{lang:About me}&lt;/h2&gt;</pre>
+<p>The second line of HTML is rendered in the language the blogger has set, while the first line of HTML always displays &ldquo;About me&rdquo; in English.</p>

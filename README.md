@@ -8,6 +8,8 @@ A free book for learning how to make Tumblr themes.
 
 ## In this repo
 
+`book`: text of the book in HTML format
+
 `ebook-website`: the code which powers the http://buildthemes.tumblr.com/ website
 
 `theme`: the complete theme code which is used as example code throughout the Build Themes book to teach theme development

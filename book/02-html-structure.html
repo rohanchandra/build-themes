@@ -1,0 +1,62 @@
+<p>Every Tumblr theme, like any HTML website, needs a couple of elements.</p>
+<p>Here is the basic HTML structure of the example theme built throughout the book with some Tumblr-only variables and blocks:</p>
+<pre class="language-html">&lt;!doctype html&gt;<br />&lt;html&gt;<br />  &lt;head&gt;<br />    &lt;meta charset="utf-8"&gt;<br />    &lt;title&gt;{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}&lt;/title&gt;<br />    {block:Description}<br />    &lt;meta name="description" content="{MetaDescription}" /&gt;<br />    {/block:Description}<br /><br />    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;<br />    &lt;link rel="shortcut icon" href="{Favicon}"/&gt;<br />    &lt;link rel="alternate" type="application/rss+xml" href="{RSS}"/&gt;<br />    &lt;link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}"&gt;<br /><br />    &lt;link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/9Qenv9yn8/normalize.min.css" /&gt;<br />    &lt;link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/lT5nwa5y4/theme.css" /&gt;<br />    &lt;style&gt;<br />      /* TODO: JS: Grid layout from Chapter 4 */<br /><br />      /* TODO: JS: loading message from Chapter 4 */<br /><br />      /* TODO: Tumblr: Add CSS customization from Chapter 3 */<br />    &lt;/style&gt;<br />  &lt;/head&gt;<br /><br />  &lt;body class="{block:IndexPage}is-index-page{/block:IndexPage} {block:PermalinkPage}is-permalink-page{/block:PermalinkPage}"&gt;<br />    &lt;header class="masthead" role="banner"&gt;<br />    &lt;-- TODO: Add masthead markup from Chapter 2 --&gt;<br />    &lt;/header&gt;<br /><br />    &lt;!-- Search results --&gt;<br />    {block:SearchPage}<br />    &lt;div class="search-page message"&gt;<br />    &lt;-- TODO: Add special page markup from Chapter 2 --&gt;<br />    &lt;/div&gt;<br />    {/block:SearchPage}<br /><br />    {block:TagPage}<br />    &lt;div class="tag-page message"&gt;<br />    &lt;-- TODO: Add special page markup from Chapter 2 --&gt;<br />    &lt;/div&gt;<br />    {/block:TagPage}<br /><br />    &lt;main role="main" {block:IndexPage}data-columns{/block:IndexPage}&gt;<br />      {block:Posts}<br />      &lt;-- TODO: Add Posts markup from Chapter 2 --&gt;<br />      {/block:Posts}<br />    &lt;/main&gt;<br /><br />    {block:Pagination}<br />    &lt;nav class="pagination"&gt;<br />      &lt;ul&gt;<br />        {block:PreviousPage}&lt;li&gt;&lt;a href="{PreviousPage}"&gt;{lang:Previous}&lt;/a&gt;&lt;/li&gt;{/block:PreviousPage}<br />        {block:NextPage}&lt;li&gt;&lt;a href="{NextPage}"&gt;{lang:Next}&lt;/a&gt;&lt;/li&gt;{/block:NextPage}<br />      &lt;/ul&gt;<br />    &lt;/nav&gt;<br />    {/block:Pagination}<br /><br />    &lt;-- TODO: Add JavaScript from Chapter 4 --&gt;<br />  &lt;/body&gt;<br />&lt;/html&gt;<br /><br /><br /></pre>
+<p>Let&rsquo;s break this boilerplate code into its parts, and discuss the special Tumblr variables used.</p>
+<h2>HTML head</h2>
+<pre class="language-html">{block:Description}<br />&lt;meta name="description" content="{MetaDescription}" /&gt;<br />{/block:Description}
+</pre>
+<p><code>{MetaDescription}</code> is used by search engines to crawl the page and display a short snippet of descriptive information about the page.</p>
+<pre class="language-html">&lt;title&gt;{block:TagPage}{Tag} | {/block:TagPage} {block:SearchPage}{lang:Search results for SearchQuery} | {/block:SearchPage}{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}&lt;/title&gt;
+</pre>
+<p>This complex bit of code is used for displaying an accurate title, which is used in search engine results and the name on tabs in browsers. Here is what it does:</p>
+<ul>
+<li><code>{block:TagPage}</code> checks if the visitor is on a tag page, with a URL of the format of http://<em>blog</em>.tumblr.com/tagged/<em>tag. </em>If the user is on a tag page then the title of &ldquo;<em>Tag</em> - Title&rdquo; will be shown as the title.</li>
+<li><code>{block:SearchPage}</code> checks if the user is on a search page. If they are then &ldquo;Search results for <em>SearchQuery</em> - Title&rdquo; is the tile.</li>
+<li>Finally, <code>{block:PostSummary}</code> uses a title, where possible, or a summary of the post content (if the user is on a post page) to generate a title like &ldquo;<em>Post name</em> - Title&rdquo;</li>
+</ul>
+<div>Note that since the user can only be on one type of page, the correct page title will be shown. For example, you can&rsquo;t be on both a post page and a tag page!</div>
+<div></div>
+<pre class="language-html">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;<br />&lt;link rel="shortcut icon" href="{Favicon}"/&gt;<br />&lt;link rel="alternate" type="application/rss+xml" href="{RSS}"/&gt;<br />&lt;link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}"&gt;
+</pre>
+<p>The RSS link helps RSS readers automatically find the feed for the blog. The favicon is the small icon visible on tabs (shown below) and the taskbar.</p>
+<p><img src="https://41.media.tumblr.com/e4d98ed2594383876c3416f230ba3185/tumblr_inline_nw90dhoh5v1rtrl3v_500.png" /></p>
+<p>As the name &ldquo;apple-touch-icon-precomposed&rdquo; suggests, the portrait image will be used for as a home screen icon for the blog on some Apple devices.</p>
+<pre class="language-html">&lt;link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/9Qenv9yn8/normalize.min.css" /&gt;</pre>
+<p>For this project we&rsquo;ve linked an external CSS file called <a href="http://necolas.github.com/normalize.css/">Normalize.css</a>, which is a handy CSS file that &ldquo;targets only the styles that need normalizing&rdquo;, an alternative to resetting styles to aid cross-browser compatibility in our CSS styles.</p>
+<pre class="language-html">&lt;link rel="stylesheet" href="http://static.tumblr.com/xeccbfq/lT5nwa5y4/theme.css" /&gt;
+</pre>
+<p>I have written most of the CSS used in the example theme, and placed it in an external file called <a href="http://static.tumblr.com/xeccbfq/lT5nwa5y4/theme.css">theme.css</a>. It is just a plain CSS file, so you are able to open it in your favorite text editor and have a read of the CSS.</p>
+<p>Most of the CSS is provided up-front as this book is focused on the Tumblr-specific elements of web development, so we won&rsquo;t spend time on styling specific elements of the theme.</p>
+<p>The CSS references the classes and IDs added later in the theme&rsquo;s HTML.</p>
+<h2>Uploading theme assets</h2>
+<p>For theme assets such as external JavaScript, CSS and images, you should upload files to the Tumblr server.</p>
+<p>This is to ensure your external assets are always available on Tumblr.</p>
+<p>To upload your own asset:</p>
+<p><img src="https://40.media.tumblr.com/c936350f9958d93786c0078d6e8c9c08/tumblr_inline_nwa748FimO1rtrl3v_500.png" /></p>
+<ol>
+<li>Open the <strong>customize panel</strong></li>
+<li>Click on <strong>theme assets</strong> in the <strong>settings menu</strong></li>
+<li>Click<strong> add a file</strong></li>
+</ol>
+<p>Clicking on &ldquo;insert&rdquo;, will give you a URL which you can reference in your theme code (much like I have done for with the URL for theme.css above).</p>
+<h2>HTML body</h2>
+<p>The theme&rsquo;s body will be structured into:</p>
+<ol>
+<li>Masthead,</li>
+<li>Special pages, and</li>
+<li>Content</li>
+</ol>
+<p>The further sections of this chapter will explore, in-depth, how to build these sections.</p>
+<h3>Masthead</h3>
+<pre class="language-html">&lt;header class="masthead" role="banner"&gt;<br />&lt;-- TODO: Add masthead markup from Chapter 2 --&gt;<br />&lt;/header&gt;
+</pre>
+<p>The masthead/header will contain blog metadata, page navigation and search.</p>
+<h3>Special pages</h3>
+<pre class="language-html">{block:SearchPage}<br />&lt;div class="search-page message"&gt;<br />&lt;-- TODO: Add special page markup from Chapter 2 --&gt;<br />&lt;/div&gt;<br />{/block:SearchPage}<br /><br />{block:TagPage}<br />&lt;div class="tag-page message"&gt;<br />&lt;-- TODO: Add special page markup from Chapter 2 --&gt;<br />&lt;/div&gt;<br />{/block:TagPage}</pre>
+<p>In tag and search pages, a special message is displayed with feedback about the tag or search results.</p>
+<h3>Content</h3>
+<pre class="language-html">&lt;main role="main" {block:IndexPage}data-columns{/block:IndexPage}&gt;<br />  {block:Posts}<br />  &lt;-- TODO: Add Posts markup from Chapter 2 --&gt;<br />  {/block:Posts}<br />&lt;/main&gt;
+</pre>
+<p>The vast majority of the theme markup will be kept in the main block, with the HTML for all the different post types in this area.</p>
+<h3>Pagination</h3>
+<p>Also included in the boilerplate HTML is the pagination markup discussed earlier, for navigation between pages. Visit the end of the <a href="/ch1/variables-blocks">variables and block</a> section to read the explanation again.</p>
