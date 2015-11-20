@@ -223,6 +223,33 @@
               display: inline-block;
             }
           }
+		  @media print {
+            /* Unstick fixed header */
+            header {
+              position: initial;
+            }
+            #chapter-header h1 {
+              margin-left: 0;
+              margin-right: 0;
+            }
+            #clear-header,
+            #tumblr_controls,
+            #chapter-nav,
+            footer	{
+              display: none;
+            }
+            /* Fixes printed page being cut-off */
+            body {
+              display: inline;
+              min-height: 100%;
+            }
+            /* Make margins smaller */
+            .inner-content {
+              margin: 6%;
+            }
+			.inner-content {
+              font-size: 1.2rem;
+            }
           {CustomCSS}
         </style>
     </head>
